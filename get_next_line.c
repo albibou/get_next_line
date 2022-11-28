@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:23 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/25 18:25:35 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/28 12:38:15 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_fillres(char *res, char *buffer)
 	char	*temp;
 
 	temp = ft_strjoin(res, buffer);
+	free(res);
 	return (temp);
 }
 
@@ -44,6 +45,7 @@ char	*ft_resetres(char *res)
 
 	set = ft_reschr(res);
 	temp = ft_substr(res, (set + 1), (BUFFER_SIZE + 1));
+	free(res);
 	return (temp);
 }
 
@@ -58,7 +60,7 @@ char	*ft_read(int fd, char *res)
 	if (!buffer)
 		return (NULL);
 	size = 1;
-	while (size >= 0)
+	while (size > 0)
 	{
 		size = read(fd, buffer, BUFFER_SIZE);
 		buffer[size] = '\0';
@@ -66,12 +68,13 @@ char	*ft_read(int fd, char *res)
 		if (ft_reschr(res) >= 0)
 			break;
 	}
+	free(buffer);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static	char	*res;
+	static	char	*res = NULL;
 	char		*line;
 
 	res = ft_read(fd, res);

@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:58:31 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/25 17:18:17 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/28 11:06:35 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char    *ft_strdup(char *s)
                 dest[i] = s[i];
                 i++;
         }
-        dest[i] = '\0';
+        dest[i] = 0;
         return (dest);
 }
 
@@ -105,7 +105,7 @@ size_t  ft_strlcpy(char *dst, char *src, size_t size)
                 dst[i] = src[i];
                         i++;
         }
-        dst[i] = '\0';
+        dst[i] = 0;
         return (srclen);
 }
 
@@ -133,6 +133,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		dest[i + y] = s2[y];
 		y++;
 	}
-	dest[i + y] = '\0';
+	dest[i + y] = 0;
 	return (dest);
 }
