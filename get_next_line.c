@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:23 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/28 12:38:15 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/29 17:23:14 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_filline(char *res)
 
 	set = ft_reschr(res);
 	line = malloc(sizeof(char) * (set + 2));
+	if (!line)
+		return (NULL);
 	ft_strlcpy(line, res, (set + 2));
 	return (line);
 }
@@ -55,17 +57,20 @@ char	*ft_read(int fd, char *res)
 	int	size;
 
 	if (!res)
+	{
 		res = malloc(sizeof(char));
+		res[0] = 0;
+	}
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	size = 1;
-	while (size > 0)
+	while (size >= 0)
 	{
 		size = read(fd, buffer, BUFFER_SIZE);
 		buffer[size] = '\0';
 		res = ft_fillres(res, buffer);
-		if (ft_reschr(res) >= 0)
+		if (ft_reschr(res) >= 0 || size == 0)
 			break;
 	}
 	free(buffer);
@@ -77,6 +82,8 @@ char	*get_next_line(int fd)
 	static	char	*res = NULL;
 	char		*line;
 
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
+		return (NULL);
 	res = ft_read(fd, res);
 	line = ft_filline(res);
 	res = ft_resetres(res);
