@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:57:44 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/29 17:11:12 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:25:02 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
-	//int	i = 0;
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);

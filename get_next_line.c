@@ -6,14 +6,10 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:23 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/29 17:23:14 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/30 18:50:21 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
 
@@ -28,7 +24,7 @@ char	*ft_fillres(char *res, char *buffer)
 
 char	*ft_filline(char *res)
 {
-	size_t	set;
+	int		set;
 	char	*line;
 
 	set = ft_reschr(res);
@@ -39,14 +35,18 @@ char	*ft_filline(char *res)
 	return (line);
 }
 
-
 char	*ft_resetres(char *res)
 {
 	char	*temp;
-	int	set;
+	int		set;
 
 	set = ft_reschr(res);
-	temp = ft_substr(res, (set + 1), (BUFFER_SIZE + 1));
+	if (set == -1)
+	{
+		free(res);
+		return (NULL);
+	}	
+	temp = ft_substr(res, (set + 1), (ft_strlen(res) - set - 1));
 	free(res);
 	return (temp);
 }
@@ -54,7 +54,7 @@ char	*ft_resetres(char *res)
 char	*ft_read(int fd, char *res)
 {
 	char	*buffer;
-	int	size;
+	int		size;
 
 	if (!res)
 	{
@@ -71,7 +71,7 @@ char	*ft_read(int fd, char *res)
 		buffer[size] = '\0';
 		res = ft_fillres(res, buffer);
 		if (ft_reschr(res) >= 0 || size == 0)
-			break;
+			break ;
 	}
 	free(buffer);
 	return (res);
@@ -79,7 +79,7 @@ char	*ft_read(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static	char	*res = NULL;
+	static char	*res = NULL;
 	char		*line;
 
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)

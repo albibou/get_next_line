@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:58:31 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/29 17:09:06 by atardif          ###   ########.fr       */
+/*   Updated: 2022/11/30 18:41:05 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char	*dest;
+	char		*dest;
 	size_t		i;
 	size_t		y;
 
 	i = 0;
 	y = 0;
-	if(len > ft_strlen(s) - 1 - start)
+	if (len > ft_strlen(s) - 1 - start)
 		len = (ft_strlen(s) - start);
 	else if (start > ft_strlen(s) - 1)
 		len = 0;
@@ -71,24 +70,20 @@ int	ft_reschr(char *res)
 	return (-1);
 }
 
-size_t  ft_strlcpy(char *dst, char *src, size_t size)
+size_t	ft_strlcpy(char *dst, char *src, size_t size)
 {
-        size_t  i;
-        size_t  srclen;
+	size_t	i;
+	size_t	srclen;
 
-        i = 0;
-        srclen = ft_strlen(src);
-        if (size == 0)
-        {
-                return (srclen);
-        }
-        while (src[i] && (i + 1) < size)
-        {
-                dst[i] = src[i];
-                        i++;
-        }
-        dst[i] = 0;
-        return (srclen);
+	i = 0;
+	srclen = ft_strlen(src);
+	while (src[i] && (i + 1) < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = 0;
+	return (srclen);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
