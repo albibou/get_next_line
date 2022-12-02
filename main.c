@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:57:44 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/30 11:25:02 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:27:44 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	if (fd == -1)
 		return(0);
 	line = get_next_line(fd);
-	while (*line)
+	while (line)
 	{
 		printf("%s", line);
 		free(line);

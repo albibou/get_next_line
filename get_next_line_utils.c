@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:58:31 by atardif           #+#    #+#             */
-/*   Updated: 2022/12/01 12:21:12 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:54:54 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substrmod(char *s, unsigned int start, size_t len)
 {
 	char		*dest;
 	size_t		i;
@@ -34,8 +34,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	y = 0;
 	if (len > ft_strlen(s) - 1 - start)
 		len = (ft_strlen(s) - start);
-	else if (start > ft_strlen(s) - 1)
-		len = 0;
+	if (start > ft_strlen(s) - 1)
+		return (NULL);
 	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
@@ -70,33 +70,30 @@ int	ft_reschr(char *res)
 	return (-1);
 }
 
-size_t	ft_strlcpy(char *dst, char *src, size_t size)
+void	ft_strlcpymod(char *dst, char *src, size_t size)
 {
 	size_t	i;
-	size_t	srclen;
 
 	i = 0;
-	srclen = ft_strlen(src);
 	while (src[i] && (i + 1) < size)
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = 0;
-	return (srclen);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoinmod(char *s1, char *s2)
 {
-	int		size;
 	char	*dest;
 	int		i;
 	int		y;
 
 	i = 0;
 	y = 0;
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	dest = malloc(sizeof(char) * size);
+	if (!s1 || !s2)
+		return (NULL);
+	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
 		return (NULL);
 	while (s1[i])

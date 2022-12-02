@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:55:46 by atardif           #+#    #+#             */
-/*   Updated: 2022/11/30 18:58:07 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:55:16 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substrmod(char *s, unsigned int start, size_t len);
+char	*ft_strjoinmod(char *s1, char *s2);
 int		ft_reschr(char *res);
-size_t	ft_strlcpy(char *dst, char *src, size_t size);
-char	*ft_strdup(char *s);
+void	ft_strlcpymod(char *dst, char *src, size_t size);
 
 #endif

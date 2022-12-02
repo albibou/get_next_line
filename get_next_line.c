@@ -6,18 +6,22 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:23 by atardif           #+#    #+#             */
-/*   Updated: 2022/12/01 15:59:13 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:55:47 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "get_next_line.h"
 
 char	*ft_fillres(char *res, char *buffer)
 {
 	char	*temp;
 
-	temp = ft_strjoin(res, buffer);
+	if (!res && buffer[0] != 0)
+	{
+		res = malloc(sizeof(char));
+		res[0] = 0;
+	}
+	temp = ft_strjoinmod(res, buffer);
 	free(res);
 	return (temp);
 }
@@ -33,7 +37,7 @@ char	*ft_filline(char *res)
 	line = malloc(sizeof(char) * (set + 2));
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, res, (set + 2));
+	ft_strlcpymod(line, res, (set + 2));
 	return (line);
 }
 
@@ -48,7 +52,7 @@ char	*ft_resetres(char *res)
 		free(res);
 		return (NULL);
 	}	
-	temp = ft_substr(res, (set + 1), (ft_strlen(res) - set - 1));
+	temp = ft_substrmod(res, (set + 1), (ft_strlen(res) - set - 1));
 	free(res);
 	return (temp);
 }
@@ -58,11 +62,6 @@ char	*ft_read(int fd, char *res)
 	char	*buffer;
 	int		size;
 
-	if (!res)
-	{
-		res = malloc(sizeof(char));
-		res[0] = 0;
-	}
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -73,9 +72,9 @@ char	*ft_read(int fd, char *res)
 		if (size == -1)
 		{
 			free(res);
-			return (NULL);
+			break ;
 		}
-		buffer[size] = '\0';
+		buffer[size] = 0;
 		res = ft_fillres(res, buffer);
 		if (ft_reschr(res) >= 0)
 			break ;
@@ -92,8 +91,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	res = ft_read(fd, res);
-	if(!res)
-		return(NULL);
+	if (!res)
+		return (NULL);
 	line = ft_filline(res);
 	res = ft_resetres(res);
 	return (line);
