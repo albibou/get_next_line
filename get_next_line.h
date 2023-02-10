@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:55:46 by atardif           #+#    #+#             */
-/*   Updated: 2022/12/02 13:55:16 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:25:34 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 # include <stddef.h>
 # include <stdlib.h>
-# include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>

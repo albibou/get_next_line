@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:13:23 by atardif           #+#    #+#             */
-/*   Updated: 2022/12/02 13:55:47 by atardif          ###   ########.fr       */
+/*   Updated: 2022/12/04 10:58:51 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*ft_read(int fd, char *res)
 		if (size == -1)
 		{
 			free(res);
+			res = NULL;
 			break ;
 		}
 		buffer[size] = 0;
@@ -94,6 +95,8 @@ char	*get_next_line(int fd)
 	if (!res)
 		return (NULL);
 	line = ft_filline(res);
+	if (!line)
+		return (NULL);
 	res = ft_resetres(res);
 	return (line);
 }
